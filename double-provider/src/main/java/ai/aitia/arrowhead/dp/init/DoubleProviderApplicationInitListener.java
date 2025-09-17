@@ -1,0 +1,41 @@
+package ai.aitia.arrowhead.dp.init;
+
+import javax.naming.ConfigurationException;
+
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import ai.aitia.arrowhead.Constants;
+import eu.arrowhead.common.init.ApplicationInitListener;
+import eu.arrowhead.dto.AuthorizationGrantRequestDTO;
+import eu.arrowhead.dto.AuthorizationPolicyRequestDTO;
+import eu.arrowhead.dto.AuthorizationPolicyResponseDTO;
+
+@Component
+public class DoubleProviderApplicationInitListener extends ApplicationInitListener {
+
+	//=================================================================================================
+	// assistant methods
+
+	//-------------------------------------------------------------------------------------------------
+	@Override
+	protected void customInit(final ContextRefreshedEvent event) throws InterruptedException, ConfigurationException {
+		final AuthorizationGrantRequestDTO payload = new AuthorizationGrantRequestDTO(
+				"LOCAL",
+				"SERVICE_DEF",
+				"doubleService",
+				"can be used by every system in the local cloud",
+				new AuthorizationPolicyRequestDTO("ALL", null, null),
+				null);
+
+		try {
+			arrowheadHttpService.consumeService(
+					Constants.SERVICE_DEF_AUTHORIZATION,
+					Constants.SERVICE_OP_GRANT,
+					AuthorizationPolicyResponseDTO.class,
+					payload);
+		} catch (final Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+}

@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/.project
+/.settings
+/double-provider/.classpath
+/double-provider/.factorypath
+/double-provider/.project
+/double-provider/.settings
+/double-provider/target
+/dummy-json-xml-translator/.classpath
+/dummy-json-xml-translator/.factorypath
+/dummy-json-xml-translator/.project
+/dummy-json-xml-translator/.settings
+/dummy-json-xml-translator/target
+/shared-resources/.classpath
+/shared-resources/.factorypath
+/shared-resources/.project
+/shared-resources/.settings
+/shared-resources/target/classes
+/shared-resources/target/test-classes
