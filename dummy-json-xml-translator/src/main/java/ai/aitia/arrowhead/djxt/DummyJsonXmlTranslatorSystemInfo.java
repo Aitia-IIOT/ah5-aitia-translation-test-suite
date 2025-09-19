@@ -52,7 +52,7 @@ public class DummyJsonXmlTranslatorSystemInfo extends SystemInfo {
 				.version("1.0.0")
 				.metadata(Constants.METADATA_KEY_DATA_MODEL_IDS, List.of(
 						List.of(SharedConstants.TEST_JSON_MODEL_ID, SharedConstants.TEST_XML_MODEL_ID),
-							SharedConstants.TEST_XML_MODEL_ID, SharedConstants.TEST_JSON_MODEL_ID))
+						List.of(SharedConstants.TEST_XML_MODEL_ID, SharedConstants.TEST_JSON_MODEL_ID)))
 				.serviceInterface(getHTTPInterfaceForDataModelTranslation())
 				.build();
 

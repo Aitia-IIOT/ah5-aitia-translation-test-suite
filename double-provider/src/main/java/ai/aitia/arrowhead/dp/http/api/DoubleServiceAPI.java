@@ -43,7 +43,7 @@ public class DoubleServiceAPI {
 					@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorMessageDTO.class)) })
 	})
 	@PostMapping(path = HTTP_API_DOUBLE_SERVICE_PATH + HTTP_API_OP_MAKE_DOUBLE_PATH, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-	public @ResponseBody TestValueList checkTargets(final HttpServletRequest request, @RequestBody final TestValueList dto) {
+	public @ResponseBody TestValueList makeDouble(final HttpServletRequest request, @RequestBody final TestValueList dto) {
 		if (request.getHeader(HttpHeaders.AUTHORIZATION) != null) {
 			System.out.println("Authorization: " + request.getHeader(HttpHeaders.AUTHORIZATION));
 		}
