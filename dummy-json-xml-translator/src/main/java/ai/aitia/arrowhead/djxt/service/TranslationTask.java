@@ -11,6 +11,7 @@ public class TranslationTask {
 	private final DataModelTranslationInitRequestDTO request;
 	private DataModelTranslationTaskStatus status;
 	private String result;
+	private String mimeType;
 	
 	//=================================================================================================
 	// methods
@@ -39,6 +40,16 @@ public class TranslationTask {
 	//-------------------------------------------------------------------------------------------------
 	public void setResult(final String result) {
 		this.result = result;
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	public void setMimeType(final String mimeType) {
+		this.mimeType = mimeType;
 	}
 
 	//-------------------------------------------------------------------------------------------------

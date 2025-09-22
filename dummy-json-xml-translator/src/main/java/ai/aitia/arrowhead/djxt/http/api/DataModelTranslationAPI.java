@@ -93,11 +93,11 @@ public class DataModelTranslationAPI {
 		switch (task.getStatus()) {
 		case PENDING:
 		case IN_PROGRESS:
-			return new DataModelTranslationResultResponseDTO(task.getStatus(), null);
+			return new DataModelTranslationResultResponseDTO(task.getStatus(), null, null);
 		case ERROR:
 		case DONE:
 			taskStore.remove(taskUuid);
-			return new DataModelTranslationResultResponseDTO(task.getStatus(), task.getResult());
+			return new DataModelTranslationResultResponseDTO(task.getStatus(), task.getResult(), task.getMimeType());
 		default:
 			throw new InternalServerError("Unknown status: " + task.getStatus().name());
 		}

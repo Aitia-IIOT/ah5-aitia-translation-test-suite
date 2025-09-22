@@ -30,6 +30,9 @@ public class TranslationWorker extends Thread {
 
 	//=================================================================================================
 	// members
+	
+	private static final String MIME_TYPE_APPLICATION_JSON = "application/json";
+	private static final String MIME_TYPE_APPLICATION_XML = "application/xml";
 
 	@Resource(name = DummyJsonXmlTranslatorConstants.TASK_QUEUE)
 	private BlockingQueue<UUID> taskQueue;
@@ -80,17 +83,21 @@ public class TranslationWorker extends Thread {
 			try {
 				final byte[] input = Base64.getDecoder().decode(task.getRequest().payload().getBytes(StandardCharsets.UTF_8));
 				byte[] result = null;
+				String mimeType = null;
 				if (task.getRequest().inputModelId().equals(SharedConstants.TEST_JSON_MODEL_ID)
 						&& task.getRequest().outputModelId().equals(SharedConstants.TEST_XML_MODEL_ID)) {
+					mimeType = MIME_TYPE_APPLICATION_XML;
 					result = translateJsonToXml(input);
 				} else if (task.getRequest().inputModelId().endsWith(SharedConstants.TEST_XML_MODEL_ID)
 						&& task.getRequest().outputModelId().equals(SharedConstants.TEST_JSON_MODEL_ID)) {
+					mimeType = MIME_TYPE_APPLICATION_JSON;
 					result = translateXmlToJson(input);
 				} else {
 					throw new InvalidParameterException("Unknown model ids");
 				}
 
 				String resultBase64 = new String(Base64.getEncoder().encode(result), StandardCharsets.UTF_8);
+				task.setMimeType(mimeType);
 				task.setResult(resultBase64);
 				task.setStatus(DataModelTranslationTaskStatus.DONE);
 			} catch (final Exception ex) {
