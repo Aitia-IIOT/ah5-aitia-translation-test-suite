@@ -38,5 +38,4 @@ replay_pid*
 /shared-resources/.factorypath
 /shared-resources/.project
 /shared-resources/.settings
-/shared-resources/target/classes
-/shared-resources/target/test-classes
+/shared-resources/target

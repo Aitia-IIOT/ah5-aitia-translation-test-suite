@@ -19,8 +19,9 @@
 	<url>https://github.com/Aitia-IIOT/ah5-aitia-translation-test-suite</url>
 	<licenses>
 		<license>
-			<name>TODO</name>
-		</license>
+	     	<name>Eclipse Public License - v 2.0</name>
+	     	<url>https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt</url>
+	   </license>
 	</licenses>
 
 	<modules>
@@ -97,13 +98,4 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>
