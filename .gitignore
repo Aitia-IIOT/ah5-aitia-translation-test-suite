@@ -39,3 +39,8 @@ replay_pid*
 /shared-resources/.project
 /shared-resources/.settings
 /shared-resources/target
+/tq-provider/.classpath
+/tq-provider/.factorypath
+/tq-provider/.project
+/tq-provider/.settings
+/tq-provider/target
