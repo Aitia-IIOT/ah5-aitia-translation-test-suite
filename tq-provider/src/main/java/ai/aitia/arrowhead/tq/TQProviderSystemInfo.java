@@ -96,14 +96,14 @@ public class TQProviderSystemInfo extends SystemInfo {
 
 	//-------------------------------------------------------------------------------------------------
 	private InterfaceModel getMQTTInterfaceForTripleService() {
-		final String templateName = getSslProperties().isSslEnabled() ? Constants.GENERIC_MQTTS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_MQTT_INTERFACE_TEMPLATE_NAME;
+		final String templateName = isSslEnabled() ? Constants.GENERIC_MQTTS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_MQTT_INTERFACE_TEMPLATE_NAME;
 
 		final DataModelsOperationModel dataModel = new DataModelsOperationModel.Builder()
 				.input(SharedConstants.TEST_JSON_MODEL_ID)
 				.output(SharedConstants.TEST_JSON_MODEL_ID)
 				.build();
 
-		return new MqttInterfaceModel.Builder(templateName, getDomainAddress(), getServerPort())
+		return new MqttInterfaceModel.Builder(templateName, getMqttBrokerAddress(), getMqttBrokerPort())
 				.baseTopic("tq/triple/")
 				.policy(ServiceInterfacePolicy.USAGE_LIMITED_TOKEN_AUTH)
 				.operation("make-triple")
@@ -113,14 +113,14 @@ public class TQProviderSystemInfo extends SystemInfo {
 
 	//-------------------------------------------------------------------------------------------------
 	private InterfaceModel getMQTTInterfaceForQuadrupleService() {
-		final String templateName = getSslProperties().isSslEnabled() ? Constants.GENERIC_MQTTS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_MQTT_INTERFACE_TEMPLATE_NAME;
+		final String templateName = isSslEnabled() ? Constants.GENERIC_MQTTS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_MQTT_INTERFACE_TEMPLATE_NAME;
 
 		final DataModelsOperationModel dataModel = new DataModelsOperationModel.Builder()
 				.input(SharedConstants.TEST_XML_MODEL_ID)
 				.output(SharedConstants.TEST_XML_MODEL_ID)
 				.build();
 
-		return new MqttInterfaceModel.Builder(templateName, getDomainAddress(), getServerPort())
+		return new MqttInterfaceModel.Builder(templateName, getMqttBrokerAddress(), getMqttBrokerPort())
 				.baseTopic("tq/quadruple/")
 				.policy(ServiceInterfacePolicy.USAGE_LIMITED_TOKEN_AUTH)
 				.operation("make-quadruple")

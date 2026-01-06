@@ -25,7 +25,7 @@ import ai.aitia.arrowhead.SharedConstants;
 import ai.aitia.arrowhead.dp.http.api.DoubleServiceAPI;
 import eu.arrowhead.common.SystemInfo;
 import eu.arrowhead.common.http.filter.authentication.AuthenticationPolicy;
-import eu.arrowhead.common.http.model.HttpDataModelsOperationModel;
+import eu.arrowhead.common.http.model.DataModelsOperationModel;
 import eu.arrowhead.common.http.model.HttpInterfaceModel;
 import eu.arrowhead.common.http.model.HttpOperationModel;
 import eu.arrowhead.common.model.InterfaceModel;
@@ -86,7 +86,7 @@ public class DoubleProviderSystemInfo extends SystemInfo {
 				.path(DoubleServiceAPI.HTTP_API_OP_MAKE_DOUBLE_PATH)
 				.build();
 
-		final HttpDataModelsOperationModel dataModel = new HttpDataModelsOperationModel.Builder()
+		final DataModelsOperationModel dataModel = new DataModelsOperationModel.Builder()
 				.input(SharedConstants.TEST_XML_MODEL_ID)
 				.output(SharedConstants.TEST_XML_MODEL_ID)
 				.build();

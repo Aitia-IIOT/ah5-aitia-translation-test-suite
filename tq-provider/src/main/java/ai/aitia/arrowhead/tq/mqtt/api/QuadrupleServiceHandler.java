@@ -56,7 +56,7 @@ public class QuadrupleServiceHandler {
 		MqttRequestTemplate template = null;
 		try {
 			template = mapper.readValue(msg.getPayload(), MqttRequestTemplate.class);
-			final TestValueList list = xmlConverter.getObjectMapper().readValue(mapper.writeValueAsBytes(template.payload()), TestValueList.class);
+			final TestValueList list = xmlConverter.getObjectMapper().readValue(template.payload().toString(), TestValueList.class);
 			final List<TestElement> result = new ArrayList<>(list.getTestElements().size());
 			list.getTestElements().forEach(e -> {
 				try {
@@ -73,7 +73,7 @@ public class QuadrupleServiceHandler {
 					template.traceId(),
 					template.qosRequirement(),
 					200,
-					new TestValueList(result));
+					xmlConverter.getObjectMapper().writeValueAsString(new TestValueList(result)));
 		} catch (final IOException ex) {
 			utils.errorResponse(ex, template);
 		}

@@ -44,3 +44,5 @@ replay_pid*
 /tq-provider/.project
 /tq-provider/.settings
 /tq-provider/target
+*.lck
+
