@@ -28,6 +28,7 @@
 		<module>shared-resources</module>
 		<module>double-provider</module>
 		<module>dummy-json-xml-translator</module>
+		<module>tq-provider</module>
 	</modules>
 
 	<dependencies>
@@ -96,6 +97,5 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 </project>

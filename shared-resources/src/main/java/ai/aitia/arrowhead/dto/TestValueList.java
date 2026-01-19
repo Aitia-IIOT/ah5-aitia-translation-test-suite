@@ -19,13 +19,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+@JacksonXmlRootElement(localName = "TestValueList")
 public class TestValueList {
 
 	//=================================================================================================
 	// members
 
-	@JacksonXmlElementWrapper(localName = "TestElements")
+	@JacksonXmlElementWrapper(useWrapping = false)
 	@JacksonXmlProperty(localName = "TestElement")
 	private List<TestElement> testElements;
 
