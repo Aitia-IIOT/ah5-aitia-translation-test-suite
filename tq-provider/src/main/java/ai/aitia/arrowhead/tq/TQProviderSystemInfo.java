@@ -13,28 +13,27 @@
  *  	AITIA
  *
  *******************************************************************************/
-package ai.aitia.arrowhead.dp;
+package ai.aitia.arrowhead.tq;
 
 import java.util.List;
 
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import ai.aitia.arrowhead.Constants;
 import ai.aitia.arrowhead.SharedConstants;
-import ai.aitia.arrowhead.dp.http.api.DoubleServiceAPI;
 import eu.arrowhead.common.SystemInfo;
+import eu.arrowhead.common.Utilities;
+import eu.arrowhead.common.exception.InvalidParameterException;
 import eu.arrowhead.common.http.filter.authentication.AuthenticationPolicy;
 import eu.arrowhead.common.http.model.DataModelsOperationModel;
-import eu.arrowhead.common.http.model.HttpInterfaceModel;
-import eu.arrowhead.common.http.model.HttpOperationModel;
 import eu.arrowhead.common.model.InterfaceModel;
 import eu.arrowhead.common.model.ServiceModel;
 import eu.arrowhead.common.model.SystemModel;
+import eu.arrowhead.common.mqtt.model.MqttInterfaceModel;
 import eu.arrowhead.dto.enums.ServiceInterfacePolicy;
 
 @Component
-public class DoubleProviderSystemInfo extends SystemInfo {
+public class TQProviderSystemInfo extends SystemInfo {
 
 	//=================================================================================================
 	// members
@@ -65,37 +64,67 @@ public class DoubleProviderSystemInfo extends SystemInfo {
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	public List<ServiceModel> getServices() {
-		final ServiceModel doubleService = new ServiceModel.Builder()
-				.serviceDefinition("doubleService")
+		final ServiceModel tripleService = new ServiceModel.Builder()
+				.serviceDefinition("tripleService")
 				.version("1.0.0")
-				.serviceInterface(getHTTPInterfaceForDoubleService())
+				.serviceInterface(getMQTTInterfaceForTripleService())
 				.build();
 
-		return List.of(doubleService);
+		final ServiceModel quadrupleService = new ServiceModel.Builder()
+				.serviceDefinition("quadrupleService")
+				.version("1.0.0")
+				.serviceInterface(getMQTTInterfaceForQuadrupleService())
+				.build();
+
+		return List.of(tripleService, quadrupleService);
 	}
 
 	//=================================================================================================
 	// assistant methods
 
 	//-------------------------------------------------------------------------------------------------
-	private InterfaceModel getHTTPInterfaceForDoubleService() {
-		final String templateName = getSslProperties().isSslEnabled() ? Constants.GENERIC_HTTPS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_HTTP_INTERFACE_TEMPLATE_NAME;
+	@Override
+	protected void customInit() {
+		if (Utilities.isEmpty(getMqttBrokerAddress())) {
+			throw new InvalidParameterException("MQTT Broker address is not defined");
+		}
 
-		final HttpOperationModel makeDouble = new HttpOperationModel.Builder()
-				.method(HttpMethod.POST.name())
-				.path(DoubleServiceAPI.HTTP_API_OP_MAKE_DOUBLE_PATH)
+		if (getMqttBrokerPort() == null) {
+			throw new InvalidParameterException("MQTT Broker port is not defined");
+		}
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	private InterfaceModel getMQTTInterfaceForTripleService() {
+		final String templateName = isSslEnabled() ? Constants.GENERIC_MQTTS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_MQTT_INTERFACE_TEMPLATE_NAME;
+
+		final DataModelsOperationModel dataModel = new DataModelsOperationModel.Builder()
+				.input(SharedConstants.TEST_JSON_MODEL_ID)
+				.output(SharedConstants.TEST_JSON_MODEL_ID)
 				.build();
+
+		return new MqttInterfaceModel.Builder(templateName, getMqttBrokerAddress(), getMqttBrokerPort())
+				.baseTopic("tq/triple/")
+				.policy(ServiceInterfacePolicy.USAGE_LIMITED_TOKEN_AUTH)
+				.operation("make-triple")
+				.dataModel("make-triple", dataModel)
+				.build();
+	}
+
+	//-------------------------------------------------------------------------------------------------
+	private InterfaceModel getMQTTInterfaceForQuadrupleService() {
+		final String templateName = isSslEnabled() ? Constants.GENERIC_MQTTS_INTERFACE_TEMPLATE_NAME : Constants.GENERIC_MQTT_INTERFACE_TEMPLATE_NAME;
 
 		final DataModelsOperationModel dataModel = new DataModelsOperationModel.Builder()
 				.input(SharedConstants.TEST_XML_MODEL_ID)
 				.output(SharedConstants.TEST_XML_MODEL_ID)
 				.build();
 
-		return new HttpInterfaceModel.Builder(templateName, getDomainAddress(), getServerPort())
-				.basePath(DoubleServiceAPI.HTTP_API_DOUBLE_SERVICE_PATH)
+		return new MqttInterfaceModel.Builder(templateName, getMqttBrokerAddress(), getMqttBrokerPort())
+				.baseTopic("tq/quadruple/")
 				.policy(ServiceInterfacePolicy.USAGE_LIMITED_TOKEN_AUTH)
-				.operation("make-double", makeDouble)
-				.dataModel("make-double", dataModel)
+				.operation("make-quadruple")
+				.dataModel("make-quadruple", dataModel)
 				.build();
 	}
 }

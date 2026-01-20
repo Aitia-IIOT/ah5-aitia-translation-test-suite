@@ -28,13 +28,14 @@
 		<module>shared-resources</module>
 		<module>double-provider</module>
 		<module>dummy-json-xml-translator</module>
+		<module>tq-provider</module>
 	</modules>
 
 	<dependencies>
 		<dependency>
 			<groupId>ai.aitia.arrowhead</groupId>
 			<artifactId>arrowhead-app-common</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<dependency>
@@ -96,6 +97,5 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 </project>
