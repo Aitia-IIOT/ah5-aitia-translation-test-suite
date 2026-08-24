@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>ai.aitia.arrowhead</groupId>
 	<artifactId>translation-test-suite</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>pom</packaging>
 	<name>ah5-aitia-translation-test-suite</name>
 	<description>Simple applications for testing AH5 translation capabilities</description>
@@ -35,13 +35,13 @@
 		<dependency>
 			<groupId>ai.aitia.arrowhead</groupId>
 			<artifactId>arrowhead-app-common</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>eu.arrowhead</groupId>
 			<artifactId>arrowhead-data-transfer-objects</artifactId>
-			<version>5.1.0</version>
+			<version>5.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

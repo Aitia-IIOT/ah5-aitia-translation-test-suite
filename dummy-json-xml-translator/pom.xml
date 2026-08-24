@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>dummy-json-xml-translator</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<name>Dummy JSON-XML Translator</name>
 	<description>Dummy translator that can translate between two very simple
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>ai.aitia.arrowhead</groupId>
 			<artifactId>shared-resources</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<dependency>
