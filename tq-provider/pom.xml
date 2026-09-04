@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>ai.aitia.arrowhead</groupId>
 		<artifactId>translation-test-suite</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<artifactId>tq-provider</artifactId>
@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>ai.aitia.arrowhead</groupId>
 			<artifactId>shared-resources</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
